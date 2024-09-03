@@ -26,10 +26,8 @@ pug_install() {
     GIST_NAT=$(pacman -Qqen | gist -p -f "${PACMANFILE}" -d 'Pacman package list.')
     GIST_AUR=$(pacman -Qqem | gist -p -f "${AURFILE}" -d 'AUR package list.')
 
-    echo "GIST_NAT=${GIST_NAT}" | \
-        sed 's/https:\/\/gist.github.com\///g' > "${pkgdir}/etc/pug";
-    echo "GIST_AUR=${GIST_AUR}" | \
-        sed 's/https:\/\/gist.github.com\///g' >> "${pkgdir}/etc/pug";
+    echo "GIST_NAT=${GIST_NAT}" | sed 's#.*/##' > "${pkgdir}/etc/pug";
+    echo "GIST_AUR=${GIST_AUR}" | sed 's#.*/##' > "${pkgdir}/etc/pug";
 
     echo "    [ ${cyan}${GIST_NAT}${white} ]"
     echo "    [ ${cyan}${GIST_AUR}${white} ]"
